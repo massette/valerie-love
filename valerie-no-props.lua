@@ -1,8 +1,8 @@
 local Valerie = {}
 
 function Valerie:new(o, v, get_value)
-    o.transitions = {}
-    o.get = get_value
+    o.transitions = o.transitions or {}
+    o.get = get_value or o.get
     
     setmetatable(o, {
         __index = self,
@@ -110,6 +110,8 @@ function Valerie:update(dt)
             end
         end
     end
+
+    self:set(self.real_value, true)
 end
 
 setmetatable(Valerie, {

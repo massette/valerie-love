@@ -1,8 +1,8 @@
 local Valerie = {}
 
 function Valerie:new(o, v, get_value, panel_props)
-    o.transitions = {}
-    o.get = get_value
+    o.transitions = o.transitions or {}
+    o.get = get_value or o.get
     
     setmetatable(o, {
         __index = self,
@@ -16,10 +16,10 @@ end
 
 function Valerie:set(v, panel_props, ignore_queue)
     if not (#self.transitions == 0 or ignore_queue) then
-        self.transitions[#self.transitions + 1] = {
+        self.transitions = {{
             old = self.real_value,
             new = v,
-        }
+        }}
 
         return self.value
     end
@@ -78,7 +78,7 @@ function Valerie:transition_t(mode, v, time, ignore_queue)
     end
 end
 
-function Valerie:update(panel_props, dt)
+function Valerie:update(dt, panel_props)
     if #self.transitions > 0 then
         local trans = self.transitions[1]
 
@@ -110,6 +110,8 @@ function Valerie:update(panel_props, dt)
             end
         end
     end
+
+    self:set(self.real_value, panel_props, true)
 end
 
 setmetatable(Valerie, {
