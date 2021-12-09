@@ -28,7 +28,8 @@ print(b.value) -- 0
 
 And make sure to call the following in love.update (or some equivalent if you're using this outside of löve2D for whatever reason).
 ```lua
-a:update(dt) -- 
+a:update(dt)
+b:update(dt)
 ```
 
 Then later in the code, you can do the one of the following to transition to another value smoothly, or to set the value.
