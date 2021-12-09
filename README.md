@@ -21,7 +21,7 @@ local b = Val({}, 0)     -- exactly the same as above
 ```
 
 To access the value of these two variables, do the following.
-```
+```lua
 print(a.value) -- 0
 print(b.value) -- 0
 ```
